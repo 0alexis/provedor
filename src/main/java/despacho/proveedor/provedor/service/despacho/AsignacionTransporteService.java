@@ -12,34 +12,18 @@ import java.util.Optional;
 import java.time.LocalDateTime;
 import java.util.List;
 
-// Paquetes importados:
-// - Modelos (AsignacionTransporte, Conductor, Vehiculo) para representar datos de negocio.
-// - Repositorios para interactuar con la base de datos (usando Spring Data JPA).
-// - Anotaciones de Spring (@Autowired, @Service) para inyección de dependencias y definición de servicio.
-// - Optional para manejar valores nulos de forma segura.
-// - LocalDateTime para manejar fechas y horas.
 
 @Service
 public class AsignacionTransporteService {
 
-    // Anotación @Service: Indica que esta clase es un servicio de Spring, gestionado por el contenedor de IoC.
-    // Esto permite inyección de dependencias y uso en otros componentes (como controladores).
 
     @Autowired
     private AsignacionTransporteRepository asignacionRepository;
-    // Inyección de dependencias del repositorio para AsignacionTransporte.
-    // @Autowired: Spring inyecta automáticamente una instancia del repositorio en esta variable.
-    // Este repositorio se usa para guardar y recuperar asignaciones de transporte en la base de datos.
 
-    @Autowired
     private ConductorRepository conductorRepository;    
-    // Inyección del repositorio para Conductor.
-    // Permite buscar conductores por criterios como cédula.
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
-    // Inyección del repositorio para Vehiculo.
-    // Permite buscar vehículos por criterios como placa.
 
     public AsignacionTransporte asignarTransporte(AsignacionTransporte dto) {
         // Validar y obtener conductor
