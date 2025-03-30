@@ -17,12 +17,12 @@ import java.util.List;
 public class AsignacionTransporteService {
 
 
-    @Autowired
+   // @Autowired
     private AsignacionTransporteRepository asignacionRepository;
 
     private ConductorRepository conductorRepository;    
 
-    @Autowired
+   // @Autowired
     private VehiculoRepository vehiculoRepository;
 
     public AsignacionTransporte asignarTransporte(AsignacionTransporte dto) {
