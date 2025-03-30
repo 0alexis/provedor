@@ -21,7 +21,7 @@ public class AsignacionTransporteService {
     private AsignacionTransporteRepository asignacionRepository;
 
     private ConductorRepository conductorRepository;    
-
+   // prueba final
    // @Autowired
     private VehiculoRepository vehiculoRepository;
 
