@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.sonarqube' version '4.4.1.3373' // Añadimos el plugin de SonarCloud
 }
 
 group = 'despacho.proveedor'
@@ -29,6 +30,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.4.3'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:3.4.3'
 
+	// Kotlin Standard Library para solucionar el error de NoClassDefFoundError
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+
+	// OkHttp con compatibilidad correcta para SonarQube
+	implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+
 	// Base de Datos
 	implementation 'mysql:mysql-connector-java:8.0.33' // Versión explícita para evitar actualizaciones no deseadas
 
@@ -45,4 +52,15 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// Configuración de SonarCloud
+sonarqube {
+	properties {
+		property "sonar.projectKey", "0alexis_provedor"  // Reemplaza con tu clave de proyecto en SonarCloud
+		property "sonar.organization", "0alexis"  // Reemplaza con tu organización en SonarCloud
+		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.token", System.getenv("provedor")  // Usa la variable de entorno para el token
+		property "sonar.gradle.skipCompile", "true"  // Evita compilación automática de Sonar
+	}
 }
