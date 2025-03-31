@@ -28,7 +28,7 @@ public class SeguimientoDespachoService {
     public SeguimientoDespacho registrarSeguimiento(SeguimientoDespacho seguimiento) {
         return repository.save(seguimiento);
     }
-
+// rama de daniel
     public SeguimientoDespacho actualizarSeguimiento(Long id, SeguimientoDespacho seguimientoActualizado) {
         return repository.findById(id).map(seguimiento -> {
             seguimiento.setUbicacionActual(seguimientoActualizado.getUbicacionActual());
