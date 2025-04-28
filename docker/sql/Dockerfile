@@ -25,11 +25,11 @@ WORKDIR /app
 COPY --from=builder /home/gradle/project/build/libs/*.jar app.jar
 
 # Exponer puerto
-EXPOSE 8080
+EXPOSE 9525
 
 # Variables de entorno (puedes omitir si pasas JAVA_OPTS al docker run)
 ENV SERVER_ADDRESS=0.0.0.0
-ENV SERVER_PORT=8080
+ENV SERVER_PORT=9525
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://3.137.166.243:3306/logistica?serverTimezone=UTC
 ENV SPRING_DATASOURCE_USERNAME=root
 ENV SPRING_DATASOURCE_PASSWORD=root
