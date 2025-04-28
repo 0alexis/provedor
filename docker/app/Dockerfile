@@ -2,7 +2,9 @@
 FROM gradle:8-jdk17 AS builder
 WORKDIR /home/gradle/project
 COPY . .
-RUN gradle build -x test
+
+RUN gradle build -x test --no-daemon
+
 
 # Etapa de ejecución
 FROM eclipse-temurin:17-jre-jammy
