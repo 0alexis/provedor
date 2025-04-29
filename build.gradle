@@ -61,7 +61,7 @@ sonarqube {
 		property "sonar.projectKey", "0alexis_provedor"  // projectKey  en SonarCloud
 		property "sonar.organization", "0alexis"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.token", System.getenv("proveedor")
+		property "sonar.token", System.getenv("PROVEEDOR_NEW")
 		//property "sonar.sources", "src/main/java"  // Ajusta según la estructura de tu proyecto
 		property "sonar.java.binaries", "build/classes/java/main"  // Necesario si compilas clases
 		property "sonar.gradle.skipCompile", "true"  // Mantén si deseas evitar compilación
