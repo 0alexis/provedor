@@ -24,7 +24,6 @@ jobs:
       - name: Cache Gradle
         uses: actions/cache@v3
         with:
-          #prueba
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
@@ -36,18 +35,17 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle (skip tests)
-        run: ./gradlew build -x test --no-daemon  # Salta las pruebas
+        run: ./gradlew build -x test --no-daemon
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          #
 
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 ./docker/app
           docker push ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
 
       - name: Deploy to EC2
@@ -55,6 +53,9 @@ jobs:
           EC2_HOST: 3.21.193.189
           EC2_USER: ubuntu
           EC2_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SPRING_DATASOURCE_URL: jdbc:mysql://3.137.166.243:3306/logistica?serverTimezone=UTC
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: root
         run: |
           echo "$EC2_KEY" > private_key.pem
           chmod 400 private_key.pem
@@ -63,5 +64,9 @@ jobs:
             docker rm provedor-app || true
             docker rmi ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
-            docker run -d -p 9525:9525 --name provedor-app ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
+            docker run -d -p 9525:9525 \
+              -e SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL \
+              -e SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME \
+              -e SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
+              --name provedor-app ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
           EOF
