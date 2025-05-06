@@ -37,8 +37,8 @@ dependencies {
 	implementation 'com.squareup.okhttp3:okhttp:4.11.0'
 
 	// Base de Datos
-	implementation 'mysql:mysql-connector-java:8.0.33' // Versión explícita para evitar actualizaciones no deseadas
-
+	//runtimeOnly 'mysql:mysql-connector-java:8.0.33' // Versión explícita para evitar actualizaciones no deseadas
+	implementation 'mysql:mysql-connector-java:8.0.28'
 	// Lombok
 	implementation 'org.projectlombok:lombok:1.18.36'
 	annotationProcessor 'org.projectlombok:lombok:1.18.36'
