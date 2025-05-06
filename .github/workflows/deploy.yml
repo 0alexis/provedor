@@ -45,7 +45,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 ./docker/app
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 -f ./docker/app/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
 
       - name: Deploy to EC2

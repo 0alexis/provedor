@@ -1,8 +1,8 @@
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-# Copia el JAR ya compilado desde la raíz del proyecto
-COPY ../../build/libs/*.jar app.jar
+# Copia el JAR ya compilado desde build/libs/
+COPY build/libs/*.jar app.jar
 
 EXPOSE 9525
 
