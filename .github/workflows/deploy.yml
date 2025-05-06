@@ -50,7 +50,7 @@ jobs:
 
       - name: Deploy to EC2
         env:
-          EC2_HOST: 3.21.193.189
+          EC2_HOST: 3.21.93.189  # Actualizada a la IP correcta
           EC2_USER: ubuntu
           EC2_KEY: ${{ secrets.EC2_SSH_KEY }}
           SPRING_DATASOURCE_URL: jdbc:mysql://3.137.166.243:3306/logistica?serverTimezone=UTC
