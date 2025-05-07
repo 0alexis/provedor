@@ -19,7 +19,7 @@ public class AsignacionTransporteController {
 
     @GetMapping
     public List<AsignacionTransporte> obtenerAsignaciones() {
-        return service.obtenerTodos();
+        return service.obtenerTodasLasAsignaciones();
     }
 
     @PostMapping
