@@ -44,30 +44,27 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
-        run: | 
+        run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 -f ./docker/app/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
 
       - name: Deploy to EC2
         env:
-          EC2_HOST: 3.21.93.189  # Actualizada a la IP correcta
+          EC2_HOST: 3.21.93.189
           EC2_USER: ubuntu
           EC2_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SPRING_DATASOURCE_URL: jdbc:mysql://3.137.166.243:3306/logistica?serverTimezone=UTC
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: root
         run: |
           echo "$EC2_KEY" > private_key.pem
           chmod 400 private_key.pem
+          # Copiar docker-compose.yml e init.sql a la instancia
+          scp -o StrictHostKeyChecking=no -i private_key.pem docker-compose.yml docker/sql/init.sql $EC2_USER@$EC2_HOST:~/proyecto/
           ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
+            # Detener y eliminar contenedor antiguo (si existe)
             docker stop provedor-app || true
             docker rm provedor-app || true
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 || true
+            # Actualizar la imagen de la API
             docker pull ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
-            docker run -d -p 9525:9525 \
-              -e SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL \
-              -e SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME \
-              -e SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
-              --name provedor-app ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
+            # Levantar el entorno con docker-compose
+            cd ~/proyecto || mkdir ~/proyecto && cd ~/proyecto
+            docker-compose up -d
           EOF
-          
