@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
-        run: |
+        run: | 
           docker build -t ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525 -f ./docker/app/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
 
@@ -70,3 +70,4 @@ jobs:
               -e SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
               --name provedor-app ${{ secrets.DOCKER_USERNAME }}/provedor-app:9525
           EOF
+          
