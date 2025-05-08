@@ -4,7 +4,7 @@ FROM gradle:8-jdk17 AS builder
 WORKDIR /home/gradle/project
 
 COPY . .
-
+#//
 RUN gradle build -x test \
     && rm -rf /home/gradle/project/.gradle /home/gradle/project/build/*-plain.jar
 
