@@ -50,7 +50,7 @@ jobs:
 
       - name: Deploy to EC2
         env:
-          EC2_HOST: 3.21.93.189
+          EC2_HOST: 3.145.183.178 # ip pertenece a la casa de alexis
           EC2_USER: ubuntu
           EC2_KEY: ${{ secrets.EC2_SSH_KEY }}
         run: |
