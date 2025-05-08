@@ -17,7 +17,7 @@ services:
       - app-network
 
   app:
-    image: ${DOCKER_USERNAME}/provedor-app:9525
+    image: proveedor/provedor-app:9525
     ports:
       - '9525:9525'
     environment:
