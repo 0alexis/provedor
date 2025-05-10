@@ -12,10 +12,15 @@ import java.util.Optional;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+//error
 @Service
 public class AsignacionTransporteService {
+<<<<<<< HEAD
+//Cambio para pull request
+    private final AsignacionTransporteRepository repository;
+=======
 
+>>>>>>> origin/develop
 
    // @Autowired
     private AsignacionTransporteRepository asignacionRepository;

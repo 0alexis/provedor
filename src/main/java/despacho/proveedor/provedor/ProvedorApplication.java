@@ -2,7 +2,7 @@ package despacho.proveedor.provedor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+//Cambios
 @SpringBootApplication
 public class ProvedorApplication {
 
