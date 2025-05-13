@@ -21,7 +21,7 @@ services:
     ports:
       - '9525:9525'
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/logistica?serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:9526/logistica?serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:
