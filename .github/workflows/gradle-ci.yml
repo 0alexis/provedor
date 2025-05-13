@@ -70,7 +70,7 @@ jobs:
       - name: Run tests
         run: ./gradlew test --no-daemon
         env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/logistica?serverTimezone=UTC
+          SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:9192/logistica?serverTimezone=UTC
           SPRING_DATASOURCE_USERNAME: root
           SPRING_DATASOURCE_PASSWORD: root
 
