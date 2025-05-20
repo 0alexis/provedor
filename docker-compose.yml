@@ -1,25 +1,25 @@
 version: '3.8'
 services:
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: logistica
-    ports:
-      - '9192:3306'
-    volumes:
-      - mysql-data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - app-network
+#  db:
+#    image: mysql:8.0
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: logistica
+#    ports:
+#      - '9192:3306'
+#    volumes:
+#      - mysql-data:/var/lib/mysql
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+#    networks:
+#      - app-network
 
   app:
     image: proveedor/provedor-app:9525
     ports:
       - '9525:9525'
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/logistica?serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:9192/logistica?serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:
