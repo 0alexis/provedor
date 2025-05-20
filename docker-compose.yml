@@ -6,8 +6,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: logistica
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     ports:
       - '9192:3306'
     volumes:
