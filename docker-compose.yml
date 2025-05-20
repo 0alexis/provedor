@@ -1,19 +1,4 @@
-
 services:
-#  db:
-#    image: mysql:8.0
-#    restart: always
-#    environment:
-#      MYSQL_ROOT_PASSWORD: root
-#      MYSQL_DATABASE: logistica
-#    ports:
-#      - '9192:3306'
-#    volumes:
-#      - mysql-data:/var/lib/mysql
-#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-#    networks:
-#      - app-network
-
   app:
     image: proveedor/provedor-app:9525
     ports:
@@ -22,14 +7,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:9192/logistica?serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-    depends_on:
-      - db
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
-
-volumes:
-  mysql-data:
